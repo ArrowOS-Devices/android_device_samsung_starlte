@@ -14,13 +14,19 @@
 # limitations under the License.
 #
 
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
-
-# Property overrides
--include $(LOCAL_PATH)/product_prop.mk
-
-# Inherit common device configuration
+# Inherit from the common tree
 $(call inherit-product, device/samsung/universal9810-common/universal9810-common.mk)
 
-# Inherit device vendor
+# Inherit proprietary files
 $(call inherit-product-if-exists, vendor/samsung/starlte/starlte-vendor.mk)
+
+# Setup dalvik vm configs
+$(call inherit-product, frameworks/native/build/phone-xhdpi-4096-dalvik-heap.mk)
+
+# Overlays
+DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
+
+# VNDK
+# PRODUCT_COPY_FILES += \
+#     prebuilts/vndk/v28/arm64/arch-arm-armv8-a/shared/vndk-sp/libc++.so:$(TARGET_COPY_OUT_VENDOR)/lib/libc++-v28.so \
+#     prebuilts/vndk/v28/arm64/arch-arm64-armv8-a/shared/vndk-sp/libc++.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libc++-v28.so

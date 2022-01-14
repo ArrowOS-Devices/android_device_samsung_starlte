@@ -14,20 +14,30 @@
 # limitations under the License.
 #
 
-# Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_o.mk)
+## Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 
-# Inherit device configuration
+## Product API level
+$(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_o.mk)
+
+## Inherit device configuration
 $(call inherit-product, device/samsung/starlte/device.mk)
+
+## Boot animation
+TARGET_BOOTANIMATION_PRELOAD := true
+TARGET_BOOTANIMATION_TEXTURE_CACHE := true
+TARGET_SCREEN_HEIGHT := 2960
+TARGET_SCREEN_WIDTH := 1440
+
+## Inherit some common Lineage stuff
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Inherit some common Lineage stuff.
+## Inherit some common Lineage stuff
 $(call inherit-product, vendor/arrow/config/common.mk)
 TARGET_INCLUDE_PIXEL_CHARGER := true
 
-# Device identifier. This must come after all inclusions
+## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := starlte
 PRODUCT_NAME := arrow_starlte
 PRODUCT_BRAND := samsung
@@ -36,7 +46,7 @@ PRODUCT_MANUFACTURER := samsung
 
 PRODUCT_GMS_CLIENTID_BASE := android-samsung
 
-# ArrowOS Properties
+## ArrowOS Properties
 DEVICE_MAINTAINER := Baddar90
 
 BUILD_FINGERPRINT := "google/marlin/marlin:10/QP1A.191005.007.A3/5972272:user/release-keys"

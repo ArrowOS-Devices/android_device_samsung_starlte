@@ -14,16 +14,27 @@
 # limitations under the License.
 #
 
+## Inherit from the common tree
+include device/samsung/universal9810-common/BoardConfigCommon.mk
+
+## Inherit from the proprietary configuration
+# include vendor/samsung/starlte/BoardConfigVendor.mk
+
 DEVICE_PATH := device/samsung/starlte
 
-# Assert
+# APEX image
+# DEXPREOPT_GENERATE_APEX_IMAGE := true
+
+TARGET_SPECIFIC_HEADER_PATH += $(DEVICE_PATH)/include
+
+## Display
+TARGET_SCREEN_DENSITY := 560
+
+## Assert
 TARGET_OTA_ASSERT_DEVICE := starltexx,starlteks,starlte
 
-# Kernel
+## Kernel
 TARGET_KERNEL_CONFIG := exynos9810-starlte_defconfig
 
-# Partitions
-BOARD_SYSTEMIMAGE_PARTITION_SIZE   := 4561305600
-
-# Inherit common board flags
-include device/samsung/universal9810-common/BoardConfigCommon.mk
+## Properties
+TARGET_VENDOR_PROP += $(DEVICE_PATH)/vendor.prop
